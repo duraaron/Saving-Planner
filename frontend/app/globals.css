@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --deep-blue: #0a1929;
+  --dark-blue: #0d2137;
+  --medium-blue: #102844;
+  --deep-green: #1b5e20;
+  --bright-green: #2e7d32;
+  --deep-orange: #e65100;
+  --bright-orange: #ff6f00;
+  --light-text: #e0e7ff;
+  --white-text: #ffffff;
+  --border-color: #1e3a5f;
+}
+
+body {
+  background: linear-gradient(135deg, var(--deep-blue) 0%, var(--dark-blue) 50%, var(--medium-blue) 100%);
+  min-height: 100vh;
+  color: var(--light-text);
+}
+
+.glass-card {
+  background: rgba(16, 40, 68, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(30, 58, 95, 0.8);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-card-light {
+  background: rgba(16, 40, 68, 0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(30, 58, 95, 0.6);
+}
+
+.gradient-green {
+  background: linear-gradient(135deg, var(--deep-green) 0%, var(--bright-green) 100%);
+}
+
+.gradient-orange {
+  background: linear-gradient(135deg, var(--deep-orange) 0%, var(--bright-orange) 100%);
+}
+
+.input-field {
+  background: rgba(16, 40, 68, 0.8);
+  border: 2px solid rgba(30, 58, 95, 0.8);
+  color: var(--white-text);
+  transition: all 0.3s ease;
+}
+
+.input-field:focus {
+  border-color: var(--bright-green);
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.3);
+  outline: none;
+}
+
+.input-field::placeholder {
+  color: rgba(224, 231, 255, 0.5);
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.status-badge.success {
+  background: linear-gradient(135deg, var(--deep-green) 0%, var(--bright-green) 100%);
+  color: white;
+}
+
+.status-badge.warning {
+  background: linear-gradient(135deg, var(--deep-orange) 0%, var(--bright-orange) 100%);
+  color: white;
+}
+
+.status-badge.info {
+  background: rgba(30, 58, 95, 0.8);
+  color: var(--light-text);
+  border: 1px solid var(--border-color);
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .7;
+  }
+}
+
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+}
+
