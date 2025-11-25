@@ -426,13 +426,23 @@ export const useSavingPlanner = (parameters: {
           return undefined;
         };
 
+        type ClearValuePrimitive = string | bigint | boolean;
+        type ClearValuesLike = Record<string, ClearValuePrimitive> | Map<string, ClearValuePrimitive>;
+
+        const getClearByHandle = (
+          results: ClearValuesLike | unknown,
+          handle: string | undefined
+        ): ClearValuePrimitive | undefined => {
+          if (!results || !handle) return undefined;
+          if (typeof (results as Map<string, ClearValuePrimitive>).get === "function") {
+            return (results as Map<string, ClearValuePrimitive>).get(handle);
+          }
+          return (results as Record<string, ClearValuePrimitive>)[handle];
+        };
+
         setDecryptedResults({
-          requiredSaving: thisRequiredSavingHandle
-            ? toBigIntOrUndefined(res[thisRequiredSavingHandle])
-            : undefined,
-          achievability: thisAchievabilityHandle
-            ? toBigIntOrUndefined(res[thisAchievabilityHandle])
-            : undefined,
+          requiredSaving: toBigIntOrUndefined(getClearByHandle(res as ClearValuesLike, thisRequiredSavingHandle)),
+          achievability: toBigIntOrUndefined(getClearByHandle(res as ClearValuesLike, thisAchievabilityHandle)),
         });
 
         setMessage("Decryption completed successfully!");
