@@ -48,17 +48,24 @@ function getSavingPlannerByChainId(
     return { abi: SavingPlannerABI.abi };
   }
 
-  const entry =
-    SavingPlannerAddresses[chainId.toString() as keyof typeof SavingPlannerAddresses];
+  const entry = SavingPlannerAddresses[
+    chainId.toString() as keyof typeof SavingPlannerAddresses
+  ] as
+    | {
+        address?: `0x${string}`;
+        chainId?: number;
+        chainName?: string;
+      }
+    | undefined;
 
-  if (!("address" in entry) || entry.address === ethers.ZeroAddress) {
+  if (!entry || !entry.address || entry.address === ethers.ZeroAddress) {
     return { abi: SavingPlannerABI.abi, chainId };
   }
 
   return {
-    address: entry?.address as `0x${string}` | undefined,
-    chainId: entry?.chainId ?? chainId,
-    chainName: entry?.chainName,
+    address: entry.address as `0x${string}` | undefined,
+    chainId: entry.chainId ?? chainId,
+    chainName: entry.chainName,
     abi: SavingPlannerABI.abi,
   };
 }
