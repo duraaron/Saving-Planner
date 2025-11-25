@@ -2,12 +2,12 @@
 pragma solidity ^0.8.24;
 
 import {FHE, euint32, externalEuint32, ebool} from "@fhevm/solidity/lib/FHE.sol";
-import {SepoliaConfig} from "@fhevm/solidity/config/ZamaConfig.sol";
+import {ZamaEthereumConfig} from "@fhevm/solidity/config/ZamaConfig.sol";
 
 /// @title Savings Planner - Encrypted Savings Goal Planning System
 /// @notice A privacy-preserving savings planning DApp using FHEVM
 /// @dev All calculations are performed on encrypted data
-contract SavingPlanner is SepoliaConfig {
+contract SavingPlanner is ZamaEthereumConfig {
     // User data structure
     struct UserSavingsData {
         euint32 target;           // Encrypted savings target amount
